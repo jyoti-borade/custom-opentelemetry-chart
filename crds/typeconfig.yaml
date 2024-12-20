@@ -1,0 +1,19 @@
+apiVersion: core.kubefed.io/v1beta1
+kind: FederatedTypeConfig
+metadata:
+  name: instrumentations.opentelemetry.io
+  namespace: kube-federation-system
+spec:
+  federatedType:
+    group: types.kubefed.io
+    kind: FederatedInstrumentation
+    pluralName: federatedinstrumentations
+    scope: Namespaced
+    version: v1beta1
+  propagation: Enabled
+  targetType:
+    group: opentelemetry.io
+    kind: Instrumentation
+    pluralName: instrumentations
+    scope: Namespaced
+    version: v1alpha1

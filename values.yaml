@@ -1,0 +1,163 @@
+opentelemetry-operator:
+  replicaCount: 1
+  nameOverride: ""
+  fullnameOverride: ""
+  imagePullSecrets: []
+  clusterDomain: cluster.local
+  additionalLabels: {}
+  pdb:
+    create: false
+    minAvailable: 1
+    maxUnavailable: ""
+  manager:
+    image:
+      repository: ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator
+      tag: ""
+    collectorImage:
+      repository: "otel/opentelemetry-collector-k8s"
+      tag: "0.107.0"
+    opampBridgeImage:
+      repository: ""
+      tag: ""
+    targetAllocatorImage:
+      repository: ""
+      tag: ""
+    autoInstrumentationImage:
+      java:
+        repository: ""
+        tag: ""
+      nodejs:
+        repository: ""
+        tag: ""
+      python:
+        repository: ""
+        tag: ""
+      dotnet:
+        repository: ""
+        tag: ""
+      apacheHttpd:
+        repository: ""
+        tag: ""
+      go:
+        repository: ""
+        tag: ""
+    featureGates: ""
+    ports:
+      metricsPort: 8080
+      webhookPort: 9443
+      healthzPort: 8081
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 64Mi
+    env:
+      ENABLE_WEBHOOKS: "true"
+    serviceAccount:
+      create: true
+      annotations: {}
+      name: ""
+    serviceMonitor:
+      enabled: false
+      extraLabels: {}
+      annotations: {}
+      metricsEndpoints:
+        - port: metrics
+      relabelings: []
+      metricRelabelings: []
+    deploymentAnnotations: {}
+    serviceAnnotations: {}
+    podAnnotations: {}
+    podLabels: {}
+    prometheusRule:
+      enabled: false
+      groups: []
+      defaultRules:
+        enabled: false
+        additionalRuleLabels: {}
+        additionalRuleAnnotations: {}
+      extraLabels: {}
+      annotations: {}
+    createRbacPermissions: false
+    extraArgs: []
+    leaderElection:
+      enabled: true
+    verticalPodAutoscaler:
+      enabled: false
+      controlledResources: []
+      maxAllowed: {}
+      minAllowed: {}
+      updatePolicy:
+        updateMode: Auto
+        minReplicas: 2
+    rolling: false
+    securityContext: {}
+  kubeRBACProxy:
+    enabled: true
+    image:
+      repository: quay.io/brancz/kube-rbac-proxy
+      tag: v0.15.0
+    ports:
+      proxyPort: 8443
+    resources:
+      limits:
+        cpu: 500m
+        memory: 128Mi
+      requests:
+        cpu: 5m
+        memory: 64Mi
+    extraArgs: []
+    securityContext: {}
+
+  admissionWebhooks:
+    create: true
+    servicePort: 443
+    failurePolicy: Fail
+    secretName: ""
+    pods:
+      failurePolicy: Ignore
+    namePrefix: ""
+    timeoutSeconds: 10
+    namespaceSelector: {}
+    objectSelector: {}
+    certManager:
+      enabled: false
+      issuerRef: {}
+      certificateAnnotations: {}
+      issuerAnnotations: {}
+      duration: ""
+      renewBefore: ""
+    autoGenerateCert:
+      enabled: true
+      recreate: true
+      certPeriodDays: 365
+    certFile: ""
+    keyFile: ""
+    caFile: ""
+    serviceAnnotations: {}
+    secretAnnotations: {}
+    secretLabels: {}
+  crds:
+    create: true
+  role:
+    create: true
+  clusterRole:
+    create: true
+  affinity: {}
+  tolerations: []
+  nodeSelector: {}
+  topologySpreadConstraints: []
+  hostNetwork: false
+  priorityClassName: ""
+  securityContext:
+    runAsGroup: 65532
+    runAsNonRoot: true
+    runAsUser: 65532
+    fsGroup: 65532
+  # testFramework:
+  #   image:
+  #     repository: busybox
+  #     tag: latest
+  

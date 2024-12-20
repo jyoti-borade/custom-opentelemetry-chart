@@ -1,0 +1,10 @@
+apiVersion: v2
+name: custom-opentelemetry-chart
+description: A custom Helm chart for OpenTelemetry Operator
+version: 1.0.0
+
+dependencies:
+  - name: opentelemetry-operator
+    version: 0.68.1
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+
