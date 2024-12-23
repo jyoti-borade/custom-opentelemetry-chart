@@ -16,6 +16,4 @@ entries:
           email: jyoti@example.com
       created: "2024-12-20T00:00:00Z"
       updated: "2024-12-20T00:00:00Z"
-    # Add more charts under this name if you want to include multiple versions or charts.
-  # You can add more chart names and versions here if you have multiple charts.
 generated: "2024-12-20T00:00:00Z"
